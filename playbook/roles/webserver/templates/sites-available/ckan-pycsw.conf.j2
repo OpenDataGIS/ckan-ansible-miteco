@@ -20,9 +20,9 @@ server {
     # ssl_session_cache dfine in stream and http
     ssl_session_tickets off;
 
-    #Redirect root to CKAN location 
+    # Redirect root to CKAN location 
     location / {
-        proxy_pass ${PROXY_CKAN_PROXY_PASS}/;
+        proxy_pass {{ proxy_ckan_proxy_pass }}/;
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header Host $host;
         #proxy_cache cache;
