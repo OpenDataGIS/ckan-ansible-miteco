@@ -81,7 +81,7 @@ collections_paths = ~/.ansible/collections:/usr/share/ansible/collections:/lib/p
 1. Clone this repository to your local machine and edit the `ansible.cfg` to use the env what you want, by default `development`:
 
     ```bash
-    git clone https://github.com/mjanez/ckan-ansible.git && cd ckan-ansible
+    git clone https://github.com/OpenDataGIS/ckan-ansible-miteco.git && cd ckan-ansible-miteco
     vi playbook/ansible.cfg
     ```
 
@@ -163,11 +163,11 @@ ckan_database: {
     # Location of the ansible.cfg file based on the clone directory
     export ANSIBLE_CONFIG=$(pwd)/playbook/ansible.cfg
 
-    # Location if ckan-ansible is cloned in the home directory
-    export ANSIBLE_CONFIG=$HOME/ckan-ansible/playbook/ansible.cfg
+    # Location if ckan-ansible-miteco is cloned in the home directory
+    export ANSIBLE_CONFIG=$HOME/ckan-ansible-miteco/playbook/ansible.cfg
 
     # Run the ansible playbook, Verbose with  -vvv
-    ansible-playbook $HOME/ckan-ansible/playbook/playbook.yml
+    ansible-playbook $HOME/ckan-ansible-miteco/playbook/playbook.yml
     ```
 
     The `ANSIBLE_CONFIG` environment variable is used to specify the location of the `ansible.cfg` file. This is useful when you have multiple Ansible configurations and you want to specify which one to use, eg. `rhel-9`, `ubuntu-20.04`, etc.
@@ -192,7 +192,7 @@ Once you have [Vagrant](https://www.vagrantup.com/docs/installation), [VirtualBo
 
   ```bash
   # Change to the project directory
-  cd ckan-ansible
+  cd ckan-ansible-miteco
 
   # Change to a specific OS directory
   cd vagrant/rhel/rhel-9
@@ -211,15 +211,15 @@ Once you have [Vagrant](https://www.vagrantup.com/docs/installation), [VirtualBo
 2. In the virtual machine, run the following commands to deploy CKAN with Ansible:
 
   ```bash
-  # ckan-ansible has been cloned into the home directory
-  export ANSIBLE_CONFIG=$HOME/ckan-ansible/playbook/ansible.cfg
+  # ckan-ansible-miteco has been cloned into the home directory
+  export ANSIBLE_CONFIG=$HOME/ckan-ansible-miteco/playbook/ansible.cfg
 
   # Verbose with  -vvv
-  ansible-playbook $HOME/ckan-ansible/playbook/playbook.yml
+  ansible-playbook $HOME/ckan-ansible-miteco/playbook/playbook.yml
   ```
 
   >[!TIP]
-  > `ckan-ansible/*/*` are rsynced to the VM at `/home/vagrant/ckan-ansible/*/*`, you can edit the playbook in your local machine and run the ansible-playbook command in the VM using [VSCode](#vagrant-and-visual-studio-code).
+  > `ckan-ansible-miteco/*/*` are rsynced to the VM at `/home/vagrant/ckan-ansible-miteco/*/*`, you can edit the playbook in your local machine and run the ansible-playbook command in the VM using [VSCode](#vagrant-and-visual-studio-code).
 
 
 1. Once the playbook has finished, you can access CKAN at `http://192.168.56.20` from your local machine.
@@ -302,7 +302,7 @@ The base configuration uses an NGINX image as the front-end (ie: reverse proxy).
 
 Creating the SSL cert and key files as follows:
 `openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=DE/ST=Berlin/L=Berlin/O=None/CN=localhost" -keyout ckan-local.key -out ckan-local.crt`
-The `ckan-local.*` files will then need to be moved into the `ckan-ansible/playbook/roles/webserver/tasks/files` directory
+The `ckan-local.*` files will then need to be moved into the `ckan-ansible-miteco/playbook/roles/webserver/tasks/files` directory
 
 ## Structure of the Ansible playbook
   ```bash
@@ -364,7 +364,7 @@ The `ckan-local.*` files will then need to be moved into the `ckan-ansible/playb
             └── ...
   ```
 
-This directory structure organizes the `ckan-ansible` project. Here's an explanation:
+This directory structure organizes the `ckan-ansible-miteco` project. Here's an explanation:
 
 * `ansible.cfg`: Ansible configuration file. This file sets global configurations for Ansible, such as the inventory file location, roles path, logging, and other settings. It ensures that Ansible knows where to find the necessary files and how to execute the playbooks.
 * `playbook.yml`: Ansible playbook for deploying CKAN. This file contains a series of tasks and roles that define the steps required to set up and configure CKAN and its dependencies. It orchestrates the deployment process by specifying which roles to apply and in what order.
